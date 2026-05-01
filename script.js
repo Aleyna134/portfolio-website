@@ -31,7 +31,7 @@ const translations = {
         proj3_desc: "Rol tabanlı kullanıcı yönetimi, iş ilanı oluşturma ve başvuru sistemi, CV yönetimi özelliklerini içeren bir web uygulaması geliştirdim.",
         proj4_title: "Sunum Koçu AI",
         proj4_date: "Haziran 2025",
-        proj4_desc: "Yapay zeka destekli bir sunum analiz platformu geliştirerek video ve ses verileri üzerinden beden dili, göz teması ve konuşma akıcılığı analizleri gerçekleştiren web uygulaması.",
+        proj4_desc: "Yapay zeka destekli bir sunum analiz platformu geliştirerek video ve ses verileri üzerinden beden dili, göz teması ve konuşma akıcılığı analizleri gerçekleştiren web uygulaması geliştirdim.",
         proj5_title: "Gazi Kampüs",
         proj5_date: "Nisan 2024",
         proj5_desc: "Öğrencilerin ders programlarını yönetebildiği, etkinlikleri takip edebildiği ve kampüs yaşamına dair bilgilere erişebildiği Android tabanlı bir mobil uygulama geliştirildi.",
