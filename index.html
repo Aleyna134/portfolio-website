@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aleyna Karaağaç | Portfolio</title>
+    <meta name="description" content="Portfolio of Aleyna Karaağaç, Computer Engineering Student.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">AK</div>
+            <ul class="nav-links">
+                <li><a href="#about" data-i18n="nav_about">Hakkımda</a></li>
+                <li><a href="#skills" data-i18n="nav_skills">Yetenekler</a></li>
+                <li><a href="#projects" data-i18n="nav_projects">Projeler</a></li>
+                <li><a href="#experience" data-i18n="nav_experience">Deneyim & Eğitim</a></li>
+                <li><a href="#contact" data-i18n="nav_contact">İletişim</a></li>
+            </ul>
+            <div class="lang-switcher">
+                <button id="lang-tr" class="active">TR</button>
+                <span>|</span>
+                <button id="lang-en">EN</button>
+            </div>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <!-- Background Ambient Glows -->
+        <div class="ambient-glow orb-1"></div>
+        <div class="ambient-glow orb-2"></div>
+        <div class="ambient-glow orb-3"></div>
+
+        <!-- Robot Intro Animation -->
+        <div class="drone-container" id="intro-drone">
+            <img src="robot.png" alt="Robot" class="robot-img">
+            <div class="laser-beam"></div>
+        </div>
+
+        <div class="hero-content" id="hero-text">
+            <h2 class="greeting" data-i18n="hero_greeting">Merhaba, ben</h2>
+            <h1 class="name neon-text" data-i18n="hero_name">Aleyna Karaağaç</h1>
+            <h3 class="title" data-i18n="hero_title">Gazi Üniversitesi / Bilgisayar Mühendisliği</h3>
+            <p class="tagline" data-i18n="hero_tagline">Web/Mobil Geliştirme & Yapay Zeka</p>
+            <a href="#projects" class="cta-button" data-i18n="hero_cta">Projelerimi Gör</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title neon-text" data-i18n="about_title">Hakkımda</h2>
+            <div class="about-content fade-in">
+                <div class="avatar-container">
+                    <img src="profile.jpg" alt="Aleyna Karaağaç" class="profile-photo">
+                </div>
+                <div class="about-text">
+                    <p data-i18n="about_text">Web/mobil uygulama geliştirme ve yapay zekâ alanlarına odaklanan üçüncü sınıf bilgisayar mühendisliği öğrencisiyim. Backend sistemler, makine öğrenmesi ve API tabanlı mimarilerde proje geliştirerek veri odaklı çözümler üretiyorum. Takım çalışmasına uyumlu, sorumluluk sahibi mühendis adayıyım.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title neon-text" data-i18n="skills_title">Teknik Yetenekler</h2>
+            <div class="skills-grid fade-in">
+                
+                <div class="skill-category glass-card">
+                    <h3 data-i18n="skill_lang">Diller</h3>
+                    <div class="skill-tags">
+                        <span>Java</span><span>Python</span><span>C</span><span>C#</span><span>JavaScript</span><span>HTML/CSS</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <h3 data-i18n="skill_backend">Backend</h3>
+                    <div class="skill-tags">
+                        <span>ASP.NET Core MVC</span><span>FastAPI</span><span>RESTful API</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <h3 data-i18n="skill_frontend">Frontend</h3>
+                    <div class="skill-tags">
+                        <span>React.js</span><span>Bootstrap</span><span>XML (Android)</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <h3 data-i18n="skill_db">Veritabanı</h3>
+                    <div class="skill-tags">
+                        <span>MSSQL</span><span>SQLite</span><span>Entity Framework Core</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <h3 data-i18n="skill_ai">AI/ML</h3>
+                    <div class="skill-tags">
+                        <span>OpenAI Whisper & GPT</span><span>MediaPipe</span><span>OpenCV</span><span>Scikit-learn</span><span>SHAP</span>
+                    </div>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <h3 data-i18n="skill_devops">DevOps/Diğer</h3>
+                    <div class="skill-tags">
+                        <span>Docker</span><span>Git/GitHub</span><span>Android Studio</span><span>Firebase</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title neon-text" data-i18n="projects_title">Projeler</h2>
+            <div class="projects-grid">
+                
+                <div class="project-card glass-card fade-in">
+                    <div class="project-header">
+                        <h3 data-i18n="proj1_title">PromptGuard – LLM Security Gateway</h3>
+                        <span class="project-date" data-i18n="proj1_date">Nisan 2026</span>
+                    </div>
+                    <p class="project-desc" data-i18n="proj1_desc">LLM tabanlı sistemlerde kişisel veri sızıntısı ve etik ihlalleri önlemek amacıyla PII detection, ethics analysis ve decision engine modüllerinden oluşan çok katmanlı bir güvenlik gateway geliştirildi.</p>
+                    <div class="project-tech">
+                        <span>Python (FastAPI)</span><span>Presidio</span><span>Gemini API</span><span>SQLAlchemy</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card fade-in">
+                    <div class="project-header">
+                        <h3 data-i18n="proj2_title">Trafik Kazası Risk Tahmini</h3>
+                        <span class="project-date" data-i18n="proj2_date">Ocak 2026</span>
+                    </div>
+                    <p class="project-desc" data-i18n="proj2_desc">Trafik kazası verileri (200k+ kayıt) üzerinde veri ön işleme, feature engineering ve makine öğrenmesi teknikleri kullanarak kaza şiddeti tahmini yapan bir model geliştirildi.</p>
+                    <div class="project-tech">
+                        <span>Python</span><span>Random Forest</span><span>SMOTE</span><span>Streamlit</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card fade-in">
+                    <div class="project-header">
+                        <h3 data-i18n="proj3_title">Kariyer Portalı</h3>
+                        <span class="project-date" data-i18n="proj3_date">Ağustos 2025</span>
+                    </div>
+                    <p class="project-desc" data-i18n="proj3_desc">Rol tabanlı kullanıcı yönetimi, iş ilanı oluşturma ve başvuru sistemi, CV yönetimi özelliklerini içeren bir web uygulaması geliştirdim.</p>
+                    <div class="project-tech">
+                        <span>ASP.NET Core</span><span>Docker</span><span>Bootstrap</span><span>MSSQL</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card fade-in">
+                    <div class="project-header">
+                        <h3 data-i18n="proj4_title">Sunum Koçu AI</h3>
+                        <span class="project-date" data-i18n="proj4_date">Haziran 2025</span>
+                    </div>
+                    <p class="project-desc" data-i18n="proj4_desc">Yapay zeka destekli bir sunum analiz platformu geliştirerek video ve ses verileri üzerinden beden dili, göz teması ve konuşma akıcılığı analizleri gerçekleştiren web uygulaması.</p>
+                    <div class="project-tech">
+                        <span>React.js</span><span>FastAPI</span><span>OpenAI Whisper</span><span>MediaPipe</span>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card fade-in">
+                    <div class="project-header">
+                        <h3 data-i18n="proj5_title">Gazi Kampüs</h3>
+                        <span class="project-date" data-i18n="proj5_date">Nisan 2024</span>
+                    </div>
+                    <p class="project-desc" data-i18n="proj5_desc">Öğrencilerin ders programlarını yönetebildiği, etkinlikleri takip edebildiği ve kampüs yaşamına dair bilgilere erişebildiği Android tabanlı bir mobil uygulama geliştirildi.</p>
+                    <div class="project-tech">
+                        <span>Java (Android)</span><span>SQLite</span><span>Firebase</span><span>Retrofit</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience & Education Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title neon-text" data-i18n="exp_edu_title">Deneyim & Eğitim</h2>
+            <div class="exp-edu-grid">
+                
+                <!-- Experience Column -->
+                <div class="timeline-column fade-in">
+                    <h3 class="column-title" data-i18n="exp_title">Deneyim & Gönüllü Çalışmalar</h3>
+                    <div class="timeline-container">
+                        
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content glass-card">
+                                <h3 data-i18n="exp1_title">Yazılım Geliştirici Stajyeri</h3>
+                                <h4 class="company" data-i18n="exp1_company">May Cyber Technology | Ankara</h4>
+                                <span class="timeline-date" data-i18n="exp1_date">Temmuz 2025 – Ağustos 2025</span>
+                                <p data-i18n="exp1_desc">ODTÜ Teknokent'te kullanıcı yönetimi, iş başvuru ilişkileri ve yönetici paneli modülleri geliştirdim.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content glass-card">
+                                <h3 data-i18n="exp2_title">Sponsorluk Başkanı</h3>
+                                <h4 class="company" data-i18n="exp2_company">ACM Gazi Öğrenci Kulübü | Ankara</h4>
+                                <span class="timeline-date" data-i18n="exp2_date">Kasım 2024 – Eylül 2025</span>
+                                <p data-i18n="exp2_desc">Kurumsal iletişim ve organizasyon süreçlerinde aktif rol aldım.</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content glass-card">
+                                <h3 data-i18n="exp3_title">Tanıtım & Halkla İlişkiler Üyesi</h3>
+                                <h4 class="company" data-i18n="exp3_company">Herkes İçin Havacılık Derneği | Ankara</h4>
+                                <span class="timeline-date" data-i18n="exp3_date">Kasım 2024 – Mayıs 2025</span>
+                                <p data-i18n="exp3_desc">Afiş ve video tasarımı ile reklamcılık alanlarında çalıştım. Kuruluşların görünürlüğünü artırmak için yaratıcı içerikler ürettim.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Education Column -->
+                <div class="timeline-column fade-in">
+                    <h3 class="column-title" data-i18n="edu_title">Eğitim</h3>
+                    <div class="timeline-container">
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content glass-card">
+                                <h3 data-i18n="edu1_title">Bilgisayar Mühendisliği (Lisans)</h3>
+                                <h4 class="company" data-i18n="edu1_company">Gazi Üniversitesi</h4>
+                                <span class="timeline-date" data-i18n="edu1_date">2022 – Günümüz</span>
+                                <p data-i18n="edu1_desc">AGNO: 3.35</p>
+                            </div>
+                        </div>
+
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content glass-card">
+                                <h3 data-i18n="edu2_title">Lise Eğitimi</h3>
+                                <h4 class="company" data-i18n="edu2_company">Şehit Oğuzhan Yaşar Anadolu Lisesi</h4>
+                                <span class="timeline-date" data-i18n="edu2_date">2017 – 2021</span>
+                                <p data-i18n="edu2_desc">Diploma Notu: 95.4</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container text-center">
+            <h2 class="section-title neon-text" data-i18n="contact_title">İletişim</h2>
+            <p class="contact-text fade-in" data-i18n="contact_text">Benimle iletişime geçmek için aşağıdaki bağlantıları kullanabilirsiniz.</p>
+            <div class="social-links fade-in">
+                <a href="mailto:aleynakaraagac046@gmail.com" class="social-btn glass-card" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+                <a href="https://github.com/Aleyna134" class="social-btn glass-card" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="https://linkedin.com/in/aleyna-karaağaç134/" class="social-btn glass-card" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin-in"></i> LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container text-center">
+            <p>&copy; <span id="current-year">2026</span> Aleyna Karaağaç. <span data-i18n="footer_text">Tüm hakları saklıdır.</span></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
