@@ -518,7 +518,6 @@ body.run-intro .laser-beam {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-top: auto;
 }
 
 .project-tech span {
@@ -531,6 +530,43 @@ body.run-intro .laser-beam {
     content: '•';
     margin-left: 0.5rem;
     color: var(--glass-border);
+}
+
+.project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1.5rem;
+    gap: 1rem;
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--cyan);
+    border: 1px solid rgba(0, 243, 255, 0.25);
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    background: rgba(0, 243, 255, 0.03);
+    transition: var(--transition);
+    flex-shrink: 0;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+}
+
+.project-link:hover {
+    color: #ffffff;
+    background: rgba(0, 243, 255, 0.15);
+    border-color: var(--cyan);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.project-link i {
+    font-size: 0.9rem;
 }
 
 /* Timeline (Experience & Education) */

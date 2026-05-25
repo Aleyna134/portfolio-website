@@ -66,6 +66,7 @@ const translations = {
         edu2_desc: "Diploma Notu: 95.4",
         contact_title: "İletişim",
         contact_text: "Benimle iletişime geçmek için aşağıdaki bağlantıları kullanabilirsiniz.",
+        proj_github: "GitHub'da Gör",
         footer_text: "Tüm hakları saklıdır."
     },
     en: {
@@ -135,6 +136,7 @@ const translations = {
         edu2_desc: "Graduation Grade: 95.4",
         contact_title: "Contact",
         contact_text: "You can use the links below to get in touch with me.",
+        proj_github: "View on GitHub",
         footer_text: "All rights reserved."
     }
 };
