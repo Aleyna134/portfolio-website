@@ -489,9 +489,9 @@ body.run-intro .laser-beam {
 
 .project-header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
 }
 
 .project-header h3 {
@@ -505,12 +505,13 @@ body.run-intro .laser-beam {
     background: rgba(0, 243, 255, 0.1);
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
+    align-self: flex-end;
 }
 
 .project-desc {
     color: var(--text-muted);
     font-size: 0.95rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.8rem;
     flex-grow: 1;
 }
 
@@ -534,11 +535,11 @@ body.run-intro .laser-beam {
 
 .project-footer {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     margin-top: auto;
-    padding-top: 1.5rem;
-    gap: 1rem;
+    padding-top: 0.8rem;
+    gap: 0.8rem;
+    width: 100%;
 }
 
 .project-link {
@@ -555,6 +556,7 @@ body.run-intro .laser-beam {
     flex-shrink: 0;
     font-family: 'Outfit', sans-serif;
     font-weight: 500;
+    align-self: flex-end;
 }
 
 .project-link:hover {
