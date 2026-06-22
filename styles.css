@@ -237,131 +237,223 @@ nav.scrolled {
     100% { transform: translate(40px, -60px) scale(1.1); }
 }
 
-.hero-content {
-    max-width: 800px;
-    position: relative;
+/* Hero Slider Container */
+.hero-slider-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 1;
 }
 
+.hero-slider {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    pointer-events: auto;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 6rem;
+    overflow: hidden;
+}
+
+.hero-slide::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 80%, rgba(5, 8, 20, 0.45) 0%, rgba(5, 8, 20, 0.95) 100%);
+    z-index: -1;
+}
+
+.hero-slide-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -2;
+    animation: zoomBackground 8s forwards cubic-bezier(0.1, 0.8, 0.3, 1);
+}
+
+@keyframes zoomBackground {
+    from {
+        transform: scale(1.08);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1.0);
+        opacity: 1;
+    }
+}
+
+.hero-content {
+    max-width: 1000px;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .hero-content .greeting {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: var(--cyan);
     margin-bottom: 0.5rem;
-    font-weight: 400;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .hero-content .name {
-    font-size: clamp(3rem, 8vw, 5rem);
-    margin-bottom: 0.5rem;
-    background: linear-gradient(90deg, #ffffff, #a8b2d1);
+    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    margin-bottom: 0.8rem;
+    background: linear-gradient(90deg, #ffffff, #e6f0ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    line-height: 1.1;
+    white-space: nowrap;
 }
 
 .hero-content .title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    color: var(--text-muted);
-    margin-bottom: 1rem;
+    font-size: clamp(1.4rem, 3.5vw, 2.3rem);
+    color: #cbd5e1;
+    margin-bottom: 1.2rem;
+    font-weight: 600;
 }
 
 .hero-content .tagline {
-    font-size: 1.1rem;
-    color: var(--text-muted);
-    margin-bottom: 2.5rem;
-    max-width: 600px;
-    margin-left: auto;
+    font-size: 1.25rem;
+    color: #cbd5e1;
+    margin-bottom: 2rem;
+    max-width: 650px;
+    margin-left: 0;
     margin-right: auto;
+    line-height: 1.7;
 }
 
-/* Intro Drone Animation Sequence */
-.drone-container {
-    display: none;
-    position: absolute;
-    top: 40%;
-    left: 0;
-    width: 100px;
-    height: 100px;
-    z-index: 10;
-    transform: translateX(-200px);
+/* Typewriter Cursor animation */
+.typewriter-cursor {
+    display: inline-block;
+    color: var(--cyan);
+    font-weight: 500;
+    margin-left: 4px;
+    animation: blinkCursor 0.8s infinite;
 }
 
-body.run-intro .drone-container {
-    display: block;
-    animation: droneFlight 6s forwards linear;
+@keyframes blinkCursor {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
-body.run-intro .hero-content {
-    animation: textDrag 6s forwards ease-in-out;
+/* Slide Specific Tags styling */
+.slide-tags {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
 }
 
-.robot-img {
-    width: 100%;
-    height: auto;
-    filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.3)) drop-shadow(0 0 20px rgba(188, 19, 254, 0.3));
+.slide-tags span {
+    background: rgba(0, 243, 255, 0.12);
+    border: 1px solid rgba(0, 243, 255, 0.45);
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--cyan);
+    text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+    transition: var(--transition);
 }
 
-body.run-intro .robot-img {
-    transform-origin: bottom center;
-    animation: robotActions 6s forwards linear;
+
+
+.slide-tags span:hover {
+    background: rgba(0, 243, 255, 0.15);
+    border-color: var(--cyan);
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
 }
 
-.laser-beam {
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    width: 0;
-    height: 2px;
-    background: var(--cyan);
-    box-shadow: 0 0 10px var(--cyan), 0 0 20px var(--purple);
-    transform: translateY(-50%) translateX(-100%);
+/* Animations inside active slide */
+.hero-slide.active .greeting {
+    animation: slideUpFade 0.6s 0.2s both;
 }
 
-body.run-intro .laser-beam {
-    animation: laserShoot 6s forwards linear;
+.hero-slide.active .name {
+    animation: slideUpFade 0.8s 0.3s both;
 }
 
-@keyframes droneFlight {
-    0% { transform: translateX(-200px) rotateY(0); }
-    12% { transform: translateX(40vw) rotateY(0); }
-    18% { transform: translateX(40vw) rotateY(0); }
-    50% { transform: translateX(80vw) rotateY(0); }
-    60% { transform: translateX(80vw) rotateY(0); }
-    70% { transform: translateX(120vw) rotateY(0); }
-    71% { transform: translateX(120vw) rotateY(180deg); }
-    75% { transform: translateX(85vw) rotateY(180deg); }
-    88% { transform: translateX(85vw) rotateY(180deg); }
-    95%, 100% { transform: translateX(120vw) rotateY(180deg); }
+.hero-slide.active .slide-tags {
+    animation: slideUpFade 0.8s 0.4s both;
 }
 
-@keyframes textDrag {
-    0%, 18% { opacity: 0; transform: translateX(-100vw); }
-    28% { opacity: 1; transform: translateX(-70vw); }
-    50%, 100% { opacity: 1; transform: translateX(0); }
+.hero-slide.active .title {
+    animation: slideUpFade 0.8s 0.4s both;
 }
 
-@keyframes laserShoot {
-    0%, 12% { width: 0; opacity: 0; }
-    18% { width: 90vw; opacity: 1; }
-    48% { width: 50vw; opacity: 1; }
-    50%, 100% { width: 0; opacity: 0; }
+.hero-slide.active .tagline {
+    animation: slideUpFade 0.8s 0.5s both;
 }
 
-@keyframes robotActions {
-    0%, 49% { transform: rotate(0); }
-    /* Dusting hands (fast body wiggle) */
-    51% { transform: rotate(10deg); }
-    53% { transform: rotate(-10deg); }
-    55% { transform: rotate(10deg); }
-    57% { transform: rotate(-10deg); }
-    59% { transform: rotate(0); }
-    /* Peek and wave (slower body tilt) */
-    60%, 75% { transform: rotate(0); }
-    80% { transform: rotate(20deg); }
-    82% { transform: rotate(-10deg); }
-    84% { transform: rotate(20deg); }
-    86% { transform: rotate(-10deg); }
-    88%, 100% { transform: rotate(0); }
+.hero-slide.active .cta-button {
+    animation: slideUpFade 0.8s 0.6s both;
 }
+
+@keyframes slideUpFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+
+@media (max-width: 768px) {
+    .hero-slide {
+        align-items: flex-end;
+        justify-content: flex-start;
+        text-align: left;
+        padding: 3rem 1.5rem;
+    }
+    .hero-content {
+        align-items: flex-start;
+    }
+    .hero-content .tagline {
+        margin-left: 0;
+        margin-right: auto;
+    }
+    .slide-tags {
+        justify-content: flex-start;
+    }
+    .hero-content .name {
+        font-size: clamp(1.6rem, 8vw, 3.2rem);
+    }
+}
+
+
 
 .cta-button {
     display: inline-block;

@@ -6,9 +6,9 @@ const translations = {
         nav_experience: "Deneyim & Eğitim",
         nav_contact: "İletişim",
         hero_greeting: "Merhaba, ben",
-        hero_name: "Aleyna Karaağaç",
-        hero_title: "Gazi Üniversitesi / Bilgisayar Mühendisliği",
-        hero_tagline: "Web/Mobil Geliştirme & Yapay Zeka",
+        hero_name: "ALEYNA KARAAĞAÇ",
+        hero_title: "Gazi Üniversitesi • Bilgisayar Mühendisliği",
+        hero_tagline: "Web ve mobil platformlarda yüksek performanslı sistemler ve yenilikçi yapay zekâ çözümleri geliştiriyorum.",
         hero_cta: "Projelerimi Gör",
         about_title: "Hakkımda",
         about_text: "Backend sistemler, otomasyon teknolojileri ve yapay zekâ destekli web/mobil uygulamalar üzerine çalışan üçüncü sınıf bilgisayar mühendisliği öğrencisiyim. Takım projelerinde aktif rol alarak güvenli, ölçeklenebilir ve kullanıcı odaklı yazılım çözümleri geliştirmeye odaklanıyorum.",
@@ -76,9 +76,9 @@ const translations = {
         nav_experience: "Experience & Education",
         nav_contact: "Contact",
         hero_greeting: "Hello, I am",
-        hero_name: "Aleyna Karaağaç",
-        hero_title: "Gazi University / Computer Engineering",
-        hero_tagline: "Web/Mobile Development & AI",
+        hero_name: "ALEYNA KARAAĞAÇ",
+        hero_title: "Gazi University • Computer Engineering",
+        hero_tagline: "Developing high-performance systems and innovative AI solutions across web and mobile platforms.",
         hero_cta: "View My Work",
         about_title: "About Me",
         about_text: "I am a third-year computer engineering student specializing in backend systems, automation technologies, and AI-powered web/mobile applications. I focus on developing secure, scalable, and user-centric software solutions by taking active roles in team projects.",
@@ -143,17 +143,25 @@ const translations = {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Intro Animation Logic ---
-    // Always play on refresh
-    document.body.classList.add('run-intro');
+
     
-    // Clean up after animation finishes
-    setTimeout(() => {
-        document.body.classList.remove('run-intro');
-        const drone = document.getElementById('intro-drone');
-        if (drone) drone.style.display = 'none';
-    }, 6500);
-    
+    // --- Typewriter Animation Logic ---
+    let typewriterTimeout;
+    function typeWriter(element, text, speed = 25) {
+        clearTimeout(typewriterTimeout);
+        element.textContent = "";
+        let i = 0;
+        
+        function type() {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                typewriterTimeout = setTimeout(type, speed);
+            }
+        }
+        type();
+    }
+
     // --- Language Switcher ---
     const btnTr = document.getElementById('lang-tr');
     const btnEn = document.getElementById('lang-en');
@@ -163,7 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
             if (translations[lang][key]) {
-                el.textContent = translations[lang][key];
+                if (key === 'hero_tagline') {
+                    typeWriter(el, translations[lang][key], 25);
+                } else {
+                    el.textContent = translations[lang][key];
+                }
             }
         });
         
@@ -178,6 +190,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     btnTr.addEventListener('click', () => setLanguage('tr'));
     btnEn.addEventListener('click', () => setLanguage('en'));
+
+    // Initialize default language and typewriter on page load
+    setLanguage('tr');
 
     // --- Navbar Scroll Effect ---
     const navbar = document.getElementById('navbar');
