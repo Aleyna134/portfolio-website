@@ -1,6 +1,6 @@
 const portfolioContext = require('./portfolio-data');
 
-const MODEL_NAME = "gemini-2.5-flash-lite";
+const MODEL_NAME = "gemini-3.5-flash-lite";
 
 const systemPrompt = `
 You are Aleyna's virtual AI assistant. Your goal is to help visitors who browse Aleyna Karaağaç's portfolio website.
