@@ -324,7 +324,7 @@ nav.scrolled {
 }
 
 .hero-content .name {
-    font-size: clamp(3.5rem, 8vw, 5.5rem);
+    font-size: clamp(2.5rem, 6vw, 4.2rem);
     margin-bottom: 0.8rem;
     background: linear-gradient(90deg, #ffffff, #e6f0ff);
     -webkit-background-clip: text;
@@ -449,7 +449,7 @@ nav.scrolled {
         justify-content: flex-start;
     }
     .hero-content .name {
-        font-size: clamp(1.6rem, 8vw, 3.2rem);
+        font-size: clamp(1.4rem, 6vw, 2.6rem);
     }
 }
 
