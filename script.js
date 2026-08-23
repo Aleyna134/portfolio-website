@@ -169,12 +169,7 @@ const translations = {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    const chatbotToggle = document.getElementById('chatbot-toggle');
-    if (chatbotToggle) {
-        chatbotToggle.addEventListener('click', () => {
-            chatbotToggle.classList.toggle('open');
-        });
-    }
+
 
     
     // --- Typewriter Animation Logic ---
