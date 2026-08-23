@@ -1059,6 +1059,23 @@ footer {
     animation: messageFadeIn 0.3s ease forwards;
 }
 
+/* Inline Clickable Links in Chat */
+.chat-message a.chat-inline-link {
+    color: var(--cyan);
+    text-decoration: underline;
+    word-break: break-all;
+    font-weight: 500;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.chat-message a.chat-inline-link:hover {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(0, 243, 255, 0.6);
+}
+
 @keyframes messageFadeIn {
     from {
         opacity: 0;

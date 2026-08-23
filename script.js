@@ -408,7 +408,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function parseMarkdown(text) {
         let safeText = escapeHTML(text);
-        
+
+        // Convert Markdown links: [text](url)
+        safeText = safeText.replace(/\[([^\]]+)\]\((https?:\/\/[^\s\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="chat-inline-link">$1 <i class="fas fa-external-link-alt"></i></a>');
+
+        // Convert standalone URLs: https://...
+        safeText = safeText.replace(/(^|[^"])((https?:\/\/[^\s<]+))/g, function(match, prefix, url) {
+            if (prefix.endsWith('=')) return match;
+            return `${prefix}<a href="${url}" target="_blank" rel="noopener noreferrer" class="chat-inline-link">${url} <i class="fas fa-external-link-alt"></i></a>`;
+        });
+
         // Bold formatting: **text** -> <strong>text</strong>
         safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
