@@ -75,7 +75,7 @@ module.exports = async (req, res) => {
     }
 
     // 2. Rate Limiting
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    const ip = req.headers['x-forwarded-for'] || (req.socket && req.socket.remoteAddress) || '127.0.0.1';
     if (isRateLimited(ip)) {
         return res.status(429).json({ error: "Too many requests. Please try again in a minute." });
     }
