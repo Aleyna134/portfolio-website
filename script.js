@@ -379,10 +379,9 @@ document.addEventListener('DOMContentLoaded', () => {
         drawParticles();
     }
 
-    // --- Chatbot Integration ---
-    // Change this to your deployed Vercel API URL if hosting the API separately.
-    // If hosting both frontend and backend on Vercel, '/api/chat' works perfectly.
-    const CHAT_API_URL = "https://portfolio-website-api.vercel.app/api/chat";
+    const CHAT_API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? '/api/chat'
+        : 'https://portfolio-websitee-nu.vercel.app/api/chat';
 
     const chatbotToggle = document.getElementById('chatbot-toggle');
     const chatbotWindow = document.getElementById('chatbot-window');
