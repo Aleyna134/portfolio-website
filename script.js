@@ -70,7 +70,16 @@ const translations = {
         contact_title: "İletişim",
         contact_text: "Benimle iletişime geçmek için aşağıdaki bağlantıları kullanabilirsiniz.",
         proj_github: "GitHub'da Gör",
-        footer_text: "Tüm hakları saklıdır."
+        footer_text: "Tüm hakları saklıdır.",
+        chat_title: "Aleyna'nın Asistanı",
+        chat_status: "Çevrimiçi",
+        chat_placeholder: "Bir şeyler yazın...",
+        chat_suggest_1: "Projelerin neler?",
+        chat_suggest_2: "Yeteneklerin neler?",
+        chat_suggest_3: "İletişim bilgileri?",
+        chat_error: "Bağlantı hatası oluştu. Lütfen tekrar deneyin.",
+        chat_limit_error: "Mesajınız 1000 karakterden uzun olamaz.",
+        chat_welcome: "Merhaba! Ben Aleyna'nın yapay zekâ asistanıyım. Aleyna'nın projeleri, eğitimi veya yetenekleri hakkında merak ettiklerinizi bana sorabilirsiniz."
     },
     en: {
         nav_about: "About",
@@ -143,7 +152,16 @@ const translations = {
         contact_title: "Contact",
         contact_text: "You can use the links below to get in touch with me.",
         proj_github: "View on GitHub",
-        footer_text: "All rights reserved."
+        footer_text: "All rights reserved.",
+        chat_title: "Aleyna's Assistant",
+        chat_status: "Online",
+        chat_placeholder: "Type a message...",
+        chat_suggest_1: "What are your projects?",
+        chat_suggest_2: "What are your skills?",
+        chat_suggest_3: "Contact details?",
+        chat_error: "A connection error occurred. Please try again.",
+        chat_limit_error: "Your message cannot exceed 1000 characters.",
+        chat_welcome: "Hello! I am Aleyna's virtual assistant. You can ask me anything about her projects, education, or technical skills."
     }
 };
 
@@ -171,8 +189,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Language Switcher ---
     const btnTr = document.getElementById('lang-tr');
     const btnEn = document.getElementById('lang-en');
+    let currentLang = 'tr';
     
     function setLanguage(lang) {
+        currentLang = lang;
         document.documentElement.lang = lang;
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');
@@ -185,6 +205,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
         
+        // Update chatbot placeholders & suggestions
+        const chatInputEl = document.getElementById('chat-input');
+        if (chatInputEl) {
+            chatInputEl.placeholder = translations[lang].chat_placeholder;
+        }
+        renderSuggestions();
+        
         if (lang === 'tr') {
             btnTr.classList.add('active');
             btnEn.classList.remove('active');
@@ -194,11 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    btnTr.addEventListener('click', () => setLanguage('tr'));
-    btnEn.addEventListener('click', () => setLanguage('en'));
 
-    // Initialize default language and typewriter on page load
-    setLanguage('tr');
 
     // --- Navbar Scroll Effect ---
     const navbar = document.getElementById('navbar');
@@ -355,4 +378,199 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeCanvas();
         drawParticles();
     }
+
+    // --- Chatbot Integration ---
+    // Change this to your deployed Vercel API URL if hosting the API separately.
+    // If hosting both frontend and backend on Vercel, '/api/chat' works perfectly.
+    const CHAT_API_URL = "https://portfolio-website-api.vercel.app/api/chat";
+
+    const chatbotToggle = document.getElementById('chatbot-toggle');
+    const chatbotWindow = document.getElementById('chatbot-window');
+    const chatClose = document.getElementById('chat-close');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const chatSend = document.getElementById('chat-send');
+    const chatSuggestions = document.getElementById('chat-suggestions');
+
+    let chatHistory = [];
+    let welcomeSent = false;
+
+    function escapeHTML(str) {
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    function parseMarkdown(text) {
+        let safeText = escapeHTML(text);
+        
+        // Bold formatting: **text** -> <strong>text</strong>
+        safeText = safeText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Lists: - item or * item
+        const lines = safeText.split('\n');
+        let inList = false;
+        let html = '';
+
+        for (let line of lines) {
+            const listMatch = line.match(/^(\s*)[-*]\s+(.*)$/);
+            if (listMatch) {
+                if (!inList) {
+                    html += '<ul>';
+                    inList = true;
+                }
+                html += `<li>${listMatch[2]}</li>`;
+            } else {
+                if (inList) {
+                    html += '</ul>';
+                    inList = false;
+                }
+                if (line.trim() !== '') {
+                    html += `<p>${line}</p>`;
+                }
+            }
+        }
+        if (inList) {
+            html += '</ul>';
+        }
+        return html;
+    }
+
+    function sendWelcomeMessage() {
+        if (welcomeSent) return;
+        appendMessage('bot', translations[currentLang].chat_welcome);
+        welcomeSent = true;
+    }
+
+    function renderSuggestions() {
+        if (!chatSuggestions) return;
+        chatSuggestions.innerHTML = '';
+        const suggests = [
+            translations[currentLang].chat_suggest_1,
+            translations[currentLang].chat_suggest_2,
+            translations[currentLang].chat_suggest_3
+        ];
+        suggests.forEach(text => {
+            const btn = document.createElement('button');
+            btn.className = 'chat-suggest-btn';
+            btn.textContent = text;
+            btn.addEventListener('click', () => {
+                chatInput.value = text;
+                sendMessage();
+            });
+            chatSuggestions.appendChild(btn);
+        });
+    }
+
+    function appendMessage(sender, text) {
+        if (!chatMessages) return;
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `chat-message ${sender}`;
+        if (sender === 'bot') {
+            msgDiv.innerHTML = parseMarkdown(text);
+        } else {
+            msgDiv.textContent = text;
+        }
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    async function sendMessage() {
+        const text = chatInput.value.trim();
+        if (!text) return;
+
+        if (text.length > 1000) {
+            alert(translations[currentLang].chat_limit_error);
+            return;
+        }
+
+        chatInput.value = '';
+        appendMessage('user', text);
+
+        // Render typing indicator
+        const indicator = document.createElement('div');
+        indicator.className = 'chat-message bot typing-indicator-container';
+        indicator.innerHTML = `
+            <div class="typing-indicator">
+                <span></span><span></span><span></span>
+            </div>
+        `;
+        chatMessages.appendChild(indicator);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        try {
+            const response = await fetch(CHAT_API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: text,
+                    history: chatHistory
+                })
+            });
+
+            // Remove indicator
+            const indicatorEl = chatMessages.querySelector('.typing-indicator-container');
+            if (indicatorEl) {
+                chatMessages.removeChild(indicatorEl);
+            }
+
+            if (!response.ok) {
+                throw new Error('API Error');
+            }
+
+            const data = await response.json();
+            const reply = data.response;
+
+            appendMessage('bot', reply);
+            chatHistory.push({ role: 'user', text: text });
+            chatHistory.push({ role: 'bot', text: reply });
+
+            // Limit history to 10 messages
+            if (chatHistory.length > 10) {
+                chatHistory.shift();
+                chatHistory.shift();
+            }
+        } catch (error) {
+            const indicatorEl = chatMessages.querySelector('.typing-indicator-container');
+            if (indicatorEl) {
+                chatMessages.removeChild(indicatorEl);
+            }
+            appendMessage('bot', translations[currentLang].chat_error);
+            console.error('Chat Error:', error);
+        }
+    }
+
+    if (chatbotToggle && chatbotWindow && chatClose) {
+        chatbotToggle.addEventListener('click', () => {
+            chatbotWindow.classList.toggle('hidden');
+            if (!chatbotWindow.classList.contains('hidden')) {
+                sendWelcomeMessage();
+                chatInput.focus();
+            }
+        });
+
+        chatClose.addEventListener('click', () => {
+            chatbotWindow.classList.add('hidden');
+        });
+    }
+
+    if (chatSend && chatInput) {
+        chatSend.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    }
+
+    btnTr.addEventListener('click', () => setLanguage('tr'));
+    btnEn.addEventListener('click', () => setLanguage('en'));
+
+    // Initialize default language and typewriter on page load
+    setLanguage('tr');
 });

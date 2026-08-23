@@ -1,2 +1,5 @@
 remove_bg.py
 __pycache__/
+.env
+.env.local
+node_modules/
