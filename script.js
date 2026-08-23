@@ -88,7 +88,7 @@ const translations = {
         chat_error: "Bağlantı hatası oluştu. Lütfen tekrar deneyin.",
         chat_limit_error: "Mesajınız 1000 karakterden uzun olamaz.",
         chat_welcome: "Merhaba! Ben Aleyna'nın yapay zekâ asistanıyım. Aleyna'nın projeleri, eğitimi veya yetenekleri hakkında merak ettiklerinizi bana sorabilirsiniz.",
-        chat_button_label: "Bana soru sor! 🤖"
+        chat_button_label: "Bana soru sor!"
     },
     en: {
         nav_about: "About",
@@ -179,7 +179,7 @@ const translations = {
         chat_error: "A connection error occurred. Please try again.",
         chat_limit_error: "Your message cannot exceed 1000 characters.",
         chat_welcome: "Hello! I am Aleyna's AI assistant. Feel free to ask me anything about Aleyna's projects, education, or skills.",
-        chat_button_label: "Ask me anything! 🤖"
+        chat_button_label: "Ask me anything!"
     }
 };
 
