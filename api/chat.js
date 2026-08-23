@@ -95,7 +95,7 @@ module.exports = async (req, res) => {
     }
 
     // 4. API Key Check
-    const apiKey = process.env.GEMINI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY ? process.env.GEMINI_API_KEY.trim() : null;
     if (!apiKey) {
         return res.status(500).json({ error: "Gemini API key is not configured on the server." });
     }
@@ -134,7 +134,7 @@ module.exports = async (req, res) => {
         if (!response.ok) {
             const errData = await response.json().catch(() => ({}));
             console.error("Gemini API Error:", errData);
-            return res.status(response.status).json({ error: "Failed to communicate with Gemini API." });
+            return res.status(response.status).json({ error: "Failed to communicate with Gemini API.", details: errData });
         }
 
         const data = await response.json();
