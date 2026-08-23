@@ -866,41 +866,76 @@ footer {
 
 /* Floating Toggle Button */
 .chatbot-toggle-btn {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: rgba(0, 243, 255, 0.1);
-    border: 1px solid rgba(0, 243, 255, 0.3);
-    color: var(--cyan);
-    font-size: 1.5rem;
+    background: transparent;
+    border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
-    transition: var(--transition);
-    backdrop-filter: blur(10px);
+    gap: 12px;
+    padding: 0;
     position: relative;
+    outline: none;
 }
 
-.chatbot-toggle-btn:hover {
-    transform: scale(1.1) rotate(5deg);
-    background: rgba(0, 243, 255, 0.2);
-    box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
+.chatbot-label-pill {
+    background: rgba(10, 15, 30, 0.85);
+    border: 1px solid rgba(0, 243, 255, 0.4);
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+    white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0, 243, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: pillFloat 3s ease-in-out infinite;
+}
+
+.chatbot-toggle-btn:hover .chatbot-label-pill {
+    transform: translateX(-4px) scale(1.05);
+    border-color: var(--cyan);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+}
+
+.chatbot-icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(0, 243, 255, 0.12);
+    border: 1.5px solid rgba(0, 243, 255, 0.4);
+    color: var(--cyan);
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.3);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: robotGlow 3s ease-in-out infinite alternate;
+}
+
+.chatbot-toggle-btn:hover .chatbot-icon-circle {
+    transform: scale(1.1) rotate(8deg);
+    background: rgba(0, 243, 255, 0.25);
+    box-shadow: 0 0 30px rgba(0, 243, 255, 0.6);
     border-color: var(--cyan);
 }
 
-.chat-badge {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: linear-gradient(135deg, var(--magenta), var(--cyan));
-    color: #fff;
-    font-size: 0.65rem;
-    font-weight: 800;
-    padding: 0.15rem 0.35rem;
-    border-radius: 10px;
-    box-shadow: 0 0 5px rgba(188, 19, 254, 0.5);
+.chatbot-toggle-btn.open .chatbot-label-pill {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(0.8);
+}
+
+@keyframes pillFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+@keyframes robotGlow {
+    0% { box-shadow: 0 0 15px rgba(0, 243, 255, 0.2); }
+    100% { box-shadow: 0 0 30px rgba(0, 243, 255, 0.5); }
 }
 
 /* Chat Window */

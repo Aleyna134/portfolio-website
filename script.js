@@ -79,7 +79,8 @@ const translations = {
         chat_suggest_3: "İletişim bilgileri?",
         chat_error: "Bağlantı hatası oluştu. Lütfen tekrar deneyin.",
         chat_limit_error: "Mesajınız 1000 karakterden uzun olamaz.",
-        chat_welcome: "Merhaba! Ben Aleyna'nın yapay zekâ asistanıyım. Aleyna'nın projeleri, eğitimi veya yetenekleri hakkında merak ettiklerinizi bana sorabilirsiniz."
+        chat_welcome: "Merhaba! Ben Aleyna'nın yapay zekâ asistanıyım. Aleyna'nın projeleri, eğitimi veya yetenekleri hakkında merak ettiklerinizi bana sorabilirsiniz.",
+        chat_button_label: "Bana soru sor! 🤖"
     },
     en: {
         nav_about: "About",
@@ -161,12 +162,19 @@ const translations = {
         chat_suggest_3: "Contact details?",
         chat_error: "A connection error occurred. Please try again.",
         chat_limit_error: "Your message cannot exceed 1000 characters.",
-        chat_welcome: "Hello! I am Aleyna's virtual assistant. You can ask me anything about her projects, education, or technical skills."
+        chat_welcome: "Hello! I am Aleyna's AI assistant. Feel free to ask me anything about Aleyna's projects, education, or skills.",
+        chat_button_label: "Ask me anything! 🤖"
     }
 };
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    const chatbotToggle = document.getElementById('chatbot-toggle');
+    if (chatbotToggle) {
+        chatbotToggle.addEventListener('click', () => {
+            chatbotToggle.classList.toggle('open');
+        });
+    }
 
     
     // --- Typewriter Animation Logic ---
@@ -547,6 +555,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (chatbotToggle && chatbotWindow && chatClose) {
         chatbotToggle.addEventListener('click', () => {
             chatbotWindow.classList.toggle('hidden');
+            chatbotToggle.classList.toggle('open');
             if (!chatbotWindow.classList.contains('hidden')) {
                 sendWelcomeMessage();
                 chatInput.focus();
@@ -555,6 +564,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         chatClose.addEventListener('click', () => {
             chatbotWindow.classList.add('hidden');
+            chatbotToggle.classList.remove('open');
         });
     }
 
