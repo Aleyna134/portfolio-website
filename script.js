@@ -381,7 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const CHAT_API_URL = (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
         ? 'http://localhost:3000/api/chat'
-        : 'https://portfolio-websitee-nu.vercel.app/api/chat';
+        : 'https://portfolio-website-vert-three-23.vercel.app/api/chat';
 
     const chatbotToggle = document.getElementById('chatbot-toggle');
     const chatbotWindow = document.getElementById('chatbot-window');
