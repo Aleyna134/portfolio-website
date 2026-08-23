@@ -1,6 +1,6 @@
 const portfolioContext = `
 ABOUT ALEYNA KARAAĞAÇ:
-Aleyna Karaağaç is a 4th-year Computer Engineering student at Gazi University. She focuses on backend systems, automation technologies, and AI-powered web/mobile applications. She is motivated, proactive, and values secure, scalable, and user-centric software solutions.
+Aleyna Karaağaç was born on March 25, 2003 (25 Mart 2003). She is a 4th-year Computer Engineering student at Gazi University. She focuses on backend systems, automation technologies, and AI-powered web/mobile applications. She is motivated, proactive, and values secure, scalable, and user-centric software solutions.
 
 EDUCATION:
 - Computer Engineering (BSc), Gazi University (2022 - Present) | GPA: 3.40 / 4.00
