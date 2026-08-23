@@ -6,6 +6,10 @@ EDUCATION:
 - Computer Engineering (BSc), Gazi University (2022 - Present) | GPA: 3.40 / 4.00
 - High School, Şehit Oğuzhan Yaşar Anadolu Lisesi (2018 - 2021) | Graduation Grade: 95.4 / 100
 
+FOREIGN LANGUAGES & EXAM SCORES:
+- English: B2 Upper-Intermediate Level (Fluent reading, writing, and professional communication)
+- YÖKDİL Exam (Science & Engineering / Fen Bilimleri): Score 78.75 / 100
+
 TECHNICAL SKILLS:
 - Languages: Python, Java, C, C#, JavaScript, HTML/CSS
 - Backend & API: FastAPI, ASP.NET Core MVC, RESTful API, gRPC, JWT, SQLAlchemy
