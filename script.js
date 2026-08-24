@@ -79,7 +79,7 @@ const translations = {
         contact_text: "Benimle iletişime geçmek için aşağıdaki bağlantıları kullanabilirsiniz.",
         proj_github: "GitHub'da Gör",
         footer_text: "Tüm hakları saklıdır.",
-        chat_title: "Aleyna'nın Asistanı",
+        chat_title: "Astra",
         chat_status: "Çevrimiçi",
         chat_placeholder: "Bir şeyler yazın...",
         chat_suggest_1: "Projelerin neler?",
@@ -87,7 +87,7 @@ const translations = {
         chat_suggest_3: "İletişim bilgileri?",
         chat_error: "Bağlantı hatası oluştu. Lütfen tekrar deneyin.",
         chat_limit_error: "Mesajınız 1000 karakterden uzun olamaz.",
-        chat_welcome: "Merhaba! Ben Aleyna'nın yapay zekâ asistanıyım. Aleyna'nın projeleri, eğitimi veya yetenekleri hakkında merak ettiklerinizi bana sorabilirsiniz.",
+        chat_welcome: "Merhaba! Ben Astra, Aleyna'nın yapay zekâ asistanıyım. Aleyna'nın projeleri, eğitimi veya yetenekleri hakkında merak ettiklerinizi bana sorabilirsiniz.",
         chat_button_label: "Bana soru sor!"
     },
     en: {
@@ -170,7 +170,7 @@ const translations = {
         contact_text: "You can use the links below to get in touch with me.",
         proj_github: "View on GitHub",
         footer_text: "All rights reserved.",
-        chat_title: "Aleyna's Assistant",
+        chat_title: "Astra",
         chat_status: "Online",
         chat_placeholder: "Type a message...",
         chat_suggest_1: "What are your projects?",
@@ -178,7 +178,7 @@ const translations = {
         chat_suggest_3: "Contact details?",
         chat_error: "A connection error occurred. Please try again.",
         chat_limit_error: "Your message cannot exceed 1000 characters.",
-        chat_welcome: "Hello! I am Aleyna's AI assistant. Feel free to ask me anything about Aleyna's projects, education, or skills.",
+        chat_welcome: "Hello! I am Astra, Aleyna's AI assistant. Feel free to ask me anything about Aleyna's projects, education, or skills.",
         chat_button_label: "Ask me anything!"
     }
 };
