@@ -402,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const binaryCanvas = document.getElementById('binary-canvas');
     if (binaryCanvas) {
         const bCtx = binaryCanvas.getContext('2d');
-        let bWidth, bHeight, fontSize = 16, columns, drops = [], speeds = [], opacities = [];
+        let bWidth, bHeight, fontSize = 24, columns, drops = [], speeds = [], opacities = [];
         const chars = ['0', '1'];
 
         function initBinaryCanvas() {
@@ -414,14 +414,14 @@ document.addEventListener('DOMContentLoaded', () => {
             speeds = [];
             opacities = [];
             for (let i = 0; i < columns; i++) {
-                drops[i] = Math.floor(Math.random() * -60);
-                speeds[i] = Math.random() * 0.7 + 0.5;
+                drops[i] = Math.floor(Math.random() * -40);
+                speeds[i] = Math.random() * 0.25 + 0.15;
                 opacities[i] = Math.random() * 0.7 + 0.3;
             }
         }
 
         function drawBinaryMatrix() {
-            bCtx.fillStyle = 'rgba(5, 8, 20, 0.14)';
+            bCtx.fillStyle = 'rgba(5, 8, 20, 0.10)';
             bCtx.fillRect(0, 0, bWidth, bHeight);
 
             bCtx.font = `600 ${fontSize}px "Fira Code", "Courier New", monospace`;
@@ -434,15 +434,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (Math.random() > 0.88) {
                     bCtx.fillStyle = '#ffffff';
                     bCtx.shadowColor = '#00f3ff';
-                    bCtx.shadowBlur = 8;
+                    bCtx.shadowBlur = 10;
                 } else if (i % 4 === 0) {
                     bCtx.fillStyle = `rgba(188, 19, 254, ${opacities[i]})`;
                     bCtx.shadowColor = '#bc13fe';
-                    bCtx.shadowBlur = 3;
+                    bCtx.shadowBlur = 4;
                 } else {
                     bCtx.fillStyle = `rgba(0, 243, 255, ${opacities[i]})`;
                     bCtx.shadowColor = '#00f3ff';
-                    bCtx.shadowBlur = 3;
+                    bCtx.shadowBlur = 4;
                 }
 
                 bCtx.fillText(text, x, y);
