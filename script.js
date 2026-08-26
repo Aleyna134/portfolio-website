@@ -398,73 +398,89 @@ document.addEventListener('DOMContentLoaded', () => {
         drawParticles();
     }
 
-    // --- Binary 0 / 1 Matrix Rain Animation (ACM Gazi Style) ---
+    // --- Binary 0 / 1 Matrix Rain Animation (High-Density Consecutive Streams - ACM Gazi Style) ---
     const binaryCanvas = document.getElementById('binary-canvas');
     if (binaryCanvas) {
         const bCtx = binaryCanvas.getContext('2d');
-        let bWidth, bHeight, columns, drops = [], speeds = [], opacities = [], fontSizes = [], currentChars = [];
+        let bWidth, bHeight, columns, drops = [], streamLengths = [], speeds = [], fontSizes = [], charStreams = [];
         const chars = ['0', '1'];
 
         function initBinaryCanvas() {
             bWidth = binaryCanvas.width = binaryCanvas.parentElement ? binaryCanvas.parentElement.offsetWidth : window.innerWidth;
             bHeight = binaryCanvas.height = binaryCanvas.parentElement ? binaryCanvas.parentElement.offsetHeight : window.innerHeight;
             
-            const colWidth = 26;
+            const colWidth = 16; // Tightly packed columns for high density!
             columns = Math.floor(bWidth / colWidth);
             
             drops = [];
+            streamLengths = [];
             speeds = [];
-            opacities = [];
             fontSizes = [];
-            currentChars = [];
+            charStreams = [];
 
             for (let i = 0; i < columns; i++) {
-                drops[i] = Math.floor(Math.random() * -50);
-                const isBackgroundLayer = Math.random() > 0.45;
-                fontSizes[i] = isBackgroundLayer ? Math.floor(Math.random() * 6 + 18) : Math.floor(Math.random() * 8 + 26);
-                // Significantly slowed fall speed (calm and smooth flow)
-                speeds[i] = isBackgroundLayer ? (Math.random() * 0.04 + 0.02) : (Math.random() * 0.07 + 0.04);
-                opacities[i] = isBackgroundLayer ? (Math.random() * 0.35 + 0.15) : (Math.random() * 0.5 + 0.45);
-                currentChars[i] = chars[Math.floor(Math.random() * chars.length)];
+                drops[i] = Math.floor(Math.random() * -80);
+                streamLengths[i] = Math.floor(Math.random() * 22 + 12); // Consecutive string of 12-34 characters!
+                const isBg = Math.random() > 0.4;
+                fontSizes[i] = isBg ? 16 : 20;
+                speeds[i] = isBg ? (Math.random() * 0.05 + 0.03) : (Math.random() * 0.08 + 0.05); // Smooth calm speed
+                
+                charStreams[i] = [];
+                for (let j = 0; j < 60; j++) {
+                    charStreams[i][j] = chars[Math.floor(Math.random() * chars.length)];
+                }
             }
         }
 
         function drawBinaryMatrix() {
-            bCtx.fillStyle = 'rgba(5, 8, 20, 0.12)';
+            bCtx.fillStyle = 'rgba(5, 8, 20, 0.16)';
             bCtx.fillRect(0, 0, bWidth, bHeight);
 
             for (let i = 0; i < columns; i++) {
-                // Calm character flip
-                if (Math.random() > 0.985) {
-                    currentChars[i] = chars[Math.floor(Math.random() * chars.length)];
+                const headY = drops[i];
+                const streamLen = streamLengths[i];
+                const colX = i * 16 + 2;
+                const fSize = fontSizes[i];
+
+                bCtx.font = `600 ${fSize}px "Fira Code", "Courier New", monospace`;
+
+                // Render consecutive trailing digits in this column
+                for (let j = 0; j < streamLen; j++) {
+                    const charY = (headY - j) * fSize;
+
+                    if (charY < -fSize || charY > bHeight + fSize) continue;
+
+                    const charIdx = (Math.abs(Math.floor(headY - j)) + i) % charStreams[i].length;
+                    const text = charStreams[i][charIdx];
+                    const fade = 1 - (j / streamLen);
+
+                    if (j === 0) {
+                        // Glowing lead character
+                        bCtx.fillStyle = '#ffffff';
+                        bCtx.shadowColor = '#00f3ff';
+                        bCtx.shadowBlur = 10;
+                    } else if (i % 3 === 0) {
+                        // Cyan trailing stream
+                        bCtx.fillStyle = `rgba(0, 243, 255, ${fade * 0.85})`;
+                        bCtx.shadowColor = '#00f3ff';
+                        bCtx.shadowBlur = 4;
+                    } else {
+                        // Magenta trailing stream
+                        bCtx.fillStyle = `rgba(188, 19, 254, ${fade * 0.75})`;
+                        bCtx.shadowColor = '#bc13fe';
+                        bCtx.shadowBlur = 3;
+                    }
+
+                    bCtx.fillText(text, colX, charY);
+                    bCtx.shadowBlur = 0;
                 }
 
-                const text = currentChars[i];
-                const x = i * 26 + 4;
-                const y = drops[i] * 26;
-
-                bCtx.font = `600 ${fontSizes[i]}px "Fira Code", "Courier New", monospace`;
-
-                if (Math.random() > 0.94) {
-                    bCtx.fillStyle = '#ffffff';
-                    bCtx.shadowColor = '#00f3ff';
-                    bCtx.shadowBlur = 12;
-                } else if (i % 3 === 0) {
-                    bCtx.fillStyle = `rgba(0, 243, 255, ${opacities[i]})`;
-                    bCtx.shadowColor = '#00f3ff';
-                    bCtx.shadowBlur = 5;
-                } else {
-                    bCtx.fillStyle = `rgba(188, 19, 254, ${opacities[i]})`;
-                    bCtx.shadowColor = '#bc13fe';
-                    bCtx.shadowBlur = 4;
-                }
-
-                bCtx.fillText(text, x, y);
-                bCtx.shadowBlur = 0;
-
-                if (y > bHeight && Math.random() > 0.975) {
+                // Reset stream to top when the entire tail passes bottom
+                if ((headY - streamLen) * fSize > bHeight && Math.random() > 0.96) {
                     drops[i] = 0;
+                    streamLengths[i] = Math.floor(Math.random() * 22 + 12);
                 }
+
                 drops[i] += speeds[i];
             }
 
