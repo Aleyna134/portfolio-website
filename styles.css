@@ -315,13 +315,12 @@ nav.scrolled {
 .hero-content .name {
     font-size: clamp(2.6rem, 6.5vw, 4.8rem);
     margin-bottom: 1.2rem;
-    background: linear-gradient(90deg, #ffffff, #e0f2fe);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
     font-weight: 800;
     line-height: 1.1;
     text-align: center;
-    filter: drop-shadow(0 0 25px rgba(0, 243, 255, 0.25));
+    text-shadow: 0 0 25px rgba(255, 255, 255, 0.4), 0 0 40px rgba(0, 243, 255, 0.35);
 }
 
 .hero-content .title {
