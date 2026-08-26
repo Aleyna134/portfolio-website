@@ -398,6 +398,70 @@ document.addEventListener('DOMContentLoaded', () => {
         drawParticles();
     }
 
+    // --- Binary 0 / 1 Matrix Rain Animation ---
+    const binaryCanvas = document.getElementById('binary-canvas');
+    if (binaryCanvas) {
+        const bCtx = binaryCanvas.getContext('2d');
+        let bWidth, bHeight, fontSize = 16, columns, drops = [], speeds = [], opacities = [];
+        const chars = ['0', '1'];
+
+        function initBinaryCanvas() {
+            bWidth = binaryCanvas.width = binaryCanvas.parentElement ? binaryCanvas.parentElement.offsetWidth : window.innerWidth;
+            bHeight = binaryCanvas.height = binaryCanvas.parentElement ? binaryCanvas.parentElement.offsetHeight : window.innerHeight;
+            columns = Math.floor(bWidth / fontSize);
+            
+            drops = [];
+            speeds = [];
+            opacities = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.floor(Math.random() * -60);
+                speeds[i] = Math.random() * 0.7 + 0.5;
+                opacities[i] = Math.random() * 0.7 + 0.3;
+            }
+        }
+
+        function drawBinaryMatrix() {
+            bCtx.fillStyle = 'rgba(5, 8, 20, 0.14)';
+            bCtx.fillRect(0, 0, bWidth, bHeight);
+
+            bCtx.font = `600 ${fontSize}px "Fira Code", "Courier New", monospace`;
+
+            for (let i = 0; i < columns; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                const x = i * fontSize;
+                const y = drops[i] * fontSize;
+
+                if (Math.random() > 0.88) {
+                    bCtx.fillStyle = '#ffffff';
+                    bCtx.shadowColor = '#00f3ff';
+                    bCtx.shadowBlur = 8;
+                } else if (i % 4 === 0) {
+                    bCtx.fillStyle = `rgba(188, 19, 254, ${opacities[i]})`;
+                    bCtx.shadowColor = '#bc13fe';
+                    bCtx.shadowBlur = 3;
+                } else {
+                    bCtx.fillStyle = `rgba(0, 243, 255, ${opacities[i]})`;
+                    bCtx.shadowColor = '#00f3ff';
+                    bCtx.shadowBlur = 3;
+                }
+
+                bCtx.fillText(text, x, y);
+                bCtx.shadowBlur = 0;
+
+                if (y > bHeight && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i] += speeds[i];
+            }
+
+            requestAnimationFrame(drawBinaryMatrix);
+        }
+
+        window.addEventListener('resize', initBinaryCanvas);
+        initBinaryCanvas();
+        drawBinaryMatrix();
+    }
+
     const CHAT_API_URL = (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
         ? 'http://localhost:3000/api/chat'
         : 'https://portfolio-website-vert-three-23.vercel.app/api/chat';
