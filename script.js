@@ -402,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const binaryCanvas = document.getElementById('binary-canvas');
     if (binaryCanvas) {
         const bCtx = binaryCanvas.getContext('2d');
-        let bWidth, bHeight, columns, drops = [], speeds = [], opacities = [], fontSizes = [];
+        let bWidth, bHeight, columns, drops = [], speeds = [], opacities = [], fontSizes = [], currentChars = [];
         const chars = ['0', '1'];
 
         function initBinaryCanvas() {
@@ -416,13 +416,16 @@ document.addEventListener('DOMContentLoaded', () => {
             speeds = [];
             opacities = [];
             fontSizes = [];
+            currentChars = [];
 
             for (let i = 0; i < columns; i++) {
                 drops[i] = Math.floor(Math.random() * -50);
                 const isBackgroundLayer = Math.random() > 0.45;
                 fontSizes[i] = isBackgroundLayer ? Math.floor(Math.random() * 6 + 18) : Math.floor(Math.random() * 8 + 26);
-                speeds[i] = isBackgroundLayer ? (Math.random() * 0.15 + 0.1) : (Math.random() * 0.25 + 0.18);
+                // Significantly slowed fall speed (calm and smooth flow)
+                speeds[i] = isBackgroundLayer ? (Math.random() * 0.04 + 0.02) : (Math.random() * 0.07 + 0.04);
                 opacities[i] = isBackgroundLayer ? (Math.random() * 0.35 + 0.15) : (Math.random() * 0.5 + 0.45);
+                currentChars[i] = chars[Math.floor(Math.random() * chars.length)];
             }
         }
 
@@ -431,13 +434,18 @@ document.addEventListener('DOMContentLoaded', () => {
             bCtx.fillRect(0, 0, bWidth, bHeight);
 
             for (let i = 0; i < columns; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
+                // Calm character flip
+                if (Math.random() > 0.985) {
+                    currentChars[i] = chars[Math.floor(Math.random() * chars.length)];
+                }
+
+                const text = currentChars[i];
                 const x = i * 26 + 4;
                 const y = drops[i] * 26;
 
                 bCtx.font = `600 ${fontSizes[i]}px "Fira Code", "Courier New", monospace`;
 
-                if (Math.random() > 0.90) {
+                if (Math.random() > 0.94) {
                     bCtx.fillStyle = '#ffffff';
                     bCtx.shadowColor = '#00f3ff';
                     bCtx.shadowBlur = 12;
