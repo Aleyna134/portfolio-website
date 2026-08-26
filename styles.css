@@ -262,10 +262,10 @@ nav.scrolled {
     opacity: 1;
     pointer-events: auto;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
-    text-align: left;
-    padding: 6rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
     overflow: hidden;
 }
 
@@ -276,7 +276,7 @@ nav.scrolled {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 20% 80%, rgba(5, 8, 20, 0.45) 0%, rgba(5, 8, 20, 0.95) 100%);
+    background: radial-gradient(circle at 50% 50%, rgba(5, 8, 20, 0.45) 0%, rgba(5, 8, 20, 0.90) 100%);
     z-index: -1;
 }
 
@@ -291,33 +291,37 @@ nav.scrolled {
 }
 
 .hero-content {
-    max-width: 1000px;
+    max-width: 900px;
     position: relative;
     z-index: 1;
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .hero-content .greeting {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: var(--cyan);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     font-weight: 500;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     text-transform: uppercase;
+    text-align: center;
 }
 
 .hero-content .name {
-    font-size: clamp(2.5rem, 6vw, 4.2rem);
-    margin-bottom: 0.8rem;
-    background: linear-gradient(90deg, #ffffff, #e6f0ff);
+    font-size: clamp(2.6rem, 6.5vw, 4.8rem);
+    margin-bottom: 1.2rem;
+    background: linear-gradient(90deg, #ffffff, #e0f2fe);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 800;
     line-height: 1.1;
-    white-space: nowrap;
+    text-align: center;
+    filter: drop-shadow(0 0 25px rgba(0, 243, 255, 0.25));
 }
 
 .hero-content .title {
@@ -325,16 +329,18 @@ nav.scrolled {
     color: #cbd5e1;
     margin-bottom: 1.2rem;
     font-weight: 600;
+    text-align: center;
 }
 
 .hero-content .tagline {
     font-size: 1.25rem;
     color: #cbd5e1;
-    margin-bottom: 2rem;
-    max-width: 650px;
-    margin-left: 0;
+    margin-bottom: 2.2rem;
+    max-width: 720px;
+    margin-left: auto;
     margin-right: auto;
     line-height: 1.7;
+    text-align: center;
 }
 
 /* Typewriter Cursor animation */

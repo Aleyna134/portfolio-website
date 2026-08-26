@@ -398,50 +398,56 @@ document.addEventListener('DOMContentLoaded', () => {
         drawParticles();
     }
 
-    // --- Binary 0 / 1 Matrix Rain Animation ---
+    // --- Binary 0 / 1 Matrix Rain Animation (ACM Gazi Style) ---
     const binaryCanvas = document.getElementById('binary-canvas');
     if (binaryCanvas) {
         const bCtx = binaryCanvas.getContext('2d');
-        let bWidth, bHeight, fontSize = 24, columns, drops = [], speeds = [], opacities = [];
+        let bWidth, bHeight, columns, drops = [], speeds = [], opacities = [], fontSizes = [];
         const chars = ['0', '1'];
 
         function initBinaryCanvas() {
             bWidth = binaryCanvas.width = binaryCanvas.parentElement ? binaryCanvas.parentElement.offsetWidth : window.innerWidth;
             bHeight = binaryCanvas.height = binaryCanvas.parentElement ? binaryCanvas.parentElement.offsetHeight : window.innerHeight;
-            columns = Math.floor(bWidth / fontSize);
+            
+            const colWidth = 26;
+            columns = Math.floor(bWidth / colWidth);
             
             drops = [];
             speeds = [];
             opacities = [];
+            fontSizes = [];
+
             for (let i = 0; i < columns; i++) {
-                drops[i] = Math.floor(Math.random() * -40);
-                speeds[i] = Math.random() * 0.25 + 0.15;
-                opacities[i] = Math.random() * 0.7 + 0.3;
+                drops[i] = Math.floor(Math.random() * -50);
+                const isBackgroundLayer = Math.random() > 0.45;
+                fontSizes[i] = isBackgroundLayer ? Math.floor(Math.random() * 6 + 18) : Math.floor(Math.random() * 8 + 26);
+                speeds[i] = isBackgroundLayer ? (Math.random() * 0.15 + 0.1) : (Math.random() * 0.25 + 0.18);
+                opacities[i] = isBackgroundLayer ? (Math.random() * 0.35 + 0.15) : (Math.random() * 0.5 + 0.45);
             }
         }
 
         function drawBinaryMatrix() {
-            bCtx.fillStyle = 'rgba(5, 8, 20, 0.10)';
+            bCtx.fillStyle = 'rgba(5, 8, 20, 0.12)';
             bCtx.fillRect(0, 0, bWidth, bHeight);
-
-            bCtx.font = `600 ${fontSize}px "Fira Code", "Courier New", monospace`;
 
             for (let i = 0; i < columns; i++) {
                 const text = chars[Math.floor(Math.random() * chars.length)];
-                const x = i * fontSize;
-                const y = drops[i] * fontSize;
+                const x = i * 26 + 4;
+                const y = drops[i] * 26;
 
-                if (Math.random() > 0.88) {
+                bCtx.font = `600 ${fontSizes[i]}px "Fira Code", "Courier New", monospace`;
+
+                if (Math.random() > 0.90) {
                     bCtx.fillStyle = '#ffffff';
                     bCtx.shadowColor = '#00f3ff';
-                    bCtx.shadowBlur = 10;
-                } else if (i % 4 === 0) {
-                    bCtx.fillStyle = `rgba(188, 19, 254, ${opacities[i]})`;
-                    bCtx.shadowColor = '#bc13fe';
-                    bCtx.shadowBlur = 4;
-                } else {
+                    bCtx.shadowBlur = 12;
+                } else if (i % 3 === 0) {
                     bCtx.fillStyle = `rgba(0, 243, 255, ${opacities[i]})`;
                     bCtx.shadowColor = '#00f3ff';
+                    bCtx.shadowBlur = 5;
+                } else {
+                    bCtx.fillStyle = `rgba(188, 19, 254, ${opacities[i]})`;
+                    bCtx.shadowColor = '#bc13fe';
                     bCtx.shadowBlur = 4;
                 }
 
